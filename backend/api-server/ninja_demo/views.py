@@ -7,4 +7,4 @@ router = Router(tags=["API1"])
 
 @router.get("/api/add", auth=[django_auth, x_session_token_auth])
 def add(request, x: float, y: float):
-    return {"result": x + y}
+    return {"result": x + y +3}
