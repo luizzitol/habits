@@ -91,7 +91,7 @@ if DEPLOYMENT_ENVIRONMENT == "prod":
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": os.environ.get("RDS_DB_NAME"),
+            "NAME": "habits",
             "USER": os.environ.get("RDS_USERNAME"),
             "PASSWORD": os.environ.get("RDS_PASSWORD"),
             "HOST": os.environ.get("RDS_HOSTNAME"),
