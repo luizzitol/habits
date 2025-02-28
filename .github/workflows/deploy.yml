@@ -25,14 +25,12 @@ jobs:
           git pull origin main
 
           # Create or update the .env file
-          cat <<EOT > .env
-RDS_DB_NAME=${{ secrets.RDS_DB_NAME }}
-RDS_USERNAME=${{ secrets.RDS_USERNAME }}
-RDS_PASSWORD=${{ secrets.RDS_PASSWORD }}
-RDS_HOSTNAME=${{ secrets.RDS_HOSTNAME }}
-RDS_PORT=${{ secrets.RDS_PORT }}
-DEPLOYMENT_ENVIRONMENT=prod
-EOT
+          echo "RDS_DB_NAME=${{ secrets.RDS_DB_NAME }}" > .env
+          echo "RDS_USERNAME=${{ secrets.RDS_USERNAME }}" >> .env
+          echo "RDS_PASSWORD=${{ secrets.RDS_PASSWORD }}" >> .env
+          echo "RDS_HOSTNAME=${{ secrets.RDS_HOSTNAME }}" >> .env
+          echo "RDS_PORT=${{ secrets.RDS_PORT }}" >> .env
+          echo "DEPLOYMENT_ENVIRONMENT=prod" >> .env
 
           cd ec2/
           sudo cp ./docker-compose.service /etc/systemd/system/docker-compose.service

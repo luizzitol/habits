@@ -17,8 +17,6 @@ services:
       dockerfile: ../deploy/docker/Dockerfile.prod
     ports:
       - "8000:8000"
-    environment:
-      - DEPLOYMENT_ENVIRONMENT=prod
     env_file:
       - ../.env
   nginx:
