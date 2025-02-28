@@ -17,6 +17,7 @@ sudo yum install libxcrypt-compat
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-sudo cp ${SCRIPT_DIR}/docker-compose.service /etc/systemd/system/docker-compose.service
+sudo cp ./docker-compose.service /etc/systemd/system/docker-compose.service
+sudo systemctl daemon-reload
 sudo systemctl enable docker-compose
 sudo systemctl start docker-compose

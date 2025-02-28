@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/ec2-user/
-ExecStart=/usr/local/bin/docker-compose -f /home/ec2-user/habits/docker-compose.prod.yml up --build -d
+WorkingDirectory=/home/ec2-user/habits/
+ExecStart=/usr/local/bin/docker-compose -f /home/ec2-user/docker-compose.prod.yml up --build -d
 Restart=always
 User=ec2-user
 
