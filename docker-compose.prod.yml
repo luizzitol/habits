@@ -17,8 +17,13 @@ services:
       dockerfile: ../deploy/docker/Dockerfile.prod
     ports:
       - "8000:8000"
-    env_file:
-      - ../.env
+    environment:
+      - DEPLOYMENT_ENVIRONMENT=prod
+      - RDS_DB_NAME=${RDS_DB_NAME}
+      - RDS_USERNAME=${RDS_USERNAME}
+      - RDS_PASSWORD=${RDS_PASSWORD}
+      - RDS_HOSTNAME=${RDS_HOSTNAME}
+      - RDS_PORT=${RDS_PORT}
   nginx:
     image: nginx:alpine
     container_name: nginx
