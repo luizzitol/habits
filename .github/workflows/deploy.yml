@@ -23,5 +23,9 @@ jobs:
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
           cd habits/
           git pull origin main
-          sudo systemctl restart docker-compose
+          cd ec2/
+          sudo cp ./docker-compose.service /etc/systemd/system/docker-compose.service
+          sudo systemctl daemon-reload
+          sudo systemctl enable docker-compose
+          sudo systemctl start docker-compose
         EOF
