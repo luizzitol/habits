@@ -23,6 +23,17 @@ jobs:
         ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
           cd habits/
           git pull origin main
+
+          # Create or update the .env file
+          cat <<EOT > .env
+          RDS_DB_NAME=${{ secrets.RDS_DB_NAME }}
+          RDS_USERNAME=${{ secrets.RDS_USERNAME }}
+          RDS_PASSWORD=${{ secrets.RDS_PASSWORD }}
+          RDS_HOSTNAME=${{ secrets.RDS_HOSTNAME }}
+          RDS_PORT=${{ secrets.RDS_PORT }}
+          DEPLOYMENT_ENVIRONMENT=prod
+          EOT
+
           cd ec2/
           sudo cp ./docker-compose.service /etc/systemd/system/docker-compose.service
           sudo systemctl daemon-reload
