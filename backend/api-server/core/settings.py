@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -8,14 +9,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
+# Default to production environment
+# Add DEPLOYMENT_ENVIRONMENT=dev to run in development mode
+DEPLOYMENT_ENVIRONMENT = os.environ.get("DEPLOYMENT_ENVIRONMENT", "dev")
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "dummy-secret-key"
+SECRET_KEY = "lujhLFDIKUHGKAEIUYFGhguhe^&*%ajhfe"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "backend"]
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -29,11 +33,16 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "allauth.socialaccount.providers.dummy",
     "allauth.headless",
     "allauth.usersessions",
-    "backend.ninja_demo",
+    "allauth.socialaccount.providers.dummy",
+    "ninja_demo",
 ]
+
+if DEPLOYMENT_ENVIRONMENT == "dev":
+    DEBUG = True
+    ALLOWED_HOSTS += ["localhost", "backend"]
+    INSTALLED_APPS += []
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -46,12 +55,12 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 ]
 
-ROOT_URLCONF = "backend.urls"
+ROOT_URLCONF = "core.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "static")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -64,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "backend.wsgi.application"
+WSGI_APPLICATION = "core.wsgi.application"
 
 
 # Database
@@ -96,6 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+STATIC_URL = "/static/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -108,11 +118,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

@@ -1,11 +1,11 @@
+# Used in development
 FROM python:3.12
 
 WORKDIR /code/
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 RUN pip install debugpy
-COPY manage.py .
-COPY ./backend ./backend/
+COPY . .
 EXPOSE 8000
 EXPOSE 5678
 

@@ -1,7 +1,7 @@
 function Service (props) {
   return (
     <div className='col'>
-      <img className='img-fluid' src={props.img} />
+      <img className='img-fluid' src={`${process.env.PUBLIC_URL}${props.img}`} alt={props.title} />
       <h3>{props.title}</h3>
       <a href={props.link}>{props.linkBody}</a>
     </div>

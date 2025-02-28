@@ -1,2 +1,9 @@
 __pycache__/
 db.sqlite3
+node_modules/
+static/
+build/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
