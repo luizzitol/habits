@@ -11,7 +11,7 @@ DEPLOYMENT_ENVIRONMENT = os.environ.get("DEPLOYMENT_ENVIRONMENT", "dev")
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "your-secret-key")
 
-AUTH_USER_MODEL = "core.User"
+AUTH_USER_MODEL = "accounts.User"
 
 # Application definition
 INSTALLED_APPS = [
@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     "allauth.headless",
     "allauth.usersessions",
     "allauth.socialaccount.providers.dummy",
-    "core",
+    "accounts",
     "ninja_demo",
 ]
 
