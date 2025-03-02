@@ -7,7 +7,6 @@ services:
     volumes:
       - ./frontend/src:/code/src/
       - ./frontend/public:/code/public/
-      - /code/node_modules
     ports:
       - "3000:3000"
     environment:
