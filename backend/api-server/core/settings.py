@@ -2,7 +2,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
 # Default to production environment
 # Add DEPLOYMENT_ENVIRONMENT=dev to run in development mode
