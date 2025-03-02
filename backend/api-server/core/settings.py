@@ -1,13 +1,8 @@
 from pathlib import Path
 import os
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # Default to production environment
 # Add DEPLOYMENT_ENVIRONMENT=dev to run in development mode
@@ -16,13 +11,7 @@ DEPLOYMENT_ENVIRONMENT = os.environ.get("DEPLOYMENT_ENVIRONMENT", "dev")
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "lujhLFDIKUHGKAEIUYFGhguhe^&*%ajhfe"
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ["*"]
-
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -38,11 +27,6 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.dummy",
     "ninja_demo",
 ]
-
-if DEPLOYMENT_ENVIRONMENT == "dev":
-    DEBUG = True
-    ALLOWED_HOSTS += ["localhost", "backend"]
-    INSTALLED_APPS += []
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -74,30 +58,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "core.wsgi.application"
-
+ALLOWED_HOSTS = ["*"]
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# Database
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
-if DEPLOYMENT_ENVIRONMENT == "prod":
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql",
-            "NAME": "habits",
-            "USER": os.environ.get("RDS_USERNAME"),
-            "PASSWORD": os.environ.get("RDS_PASSWORD"),
-            "HOST": os.environ.get("RDS_HOSTNAME"),
-            "PORT": os.environ.get("RDS_PORT", "5432"),
-        }
-    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -130,14 +101,10 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-EMAIL_HOST = "mail"
-EMAIL_PORT = 1025
 
 AUTHENTICATION_BACKENDS = ("allauth.account.auth_backends.AuthenticationBackend",)
 
@@ -161,7 +128,9 @@ HEADLESS_FRONTEND_URLS = {
 }
 HEADLESS_SERVE_SPECIFICATION = True
 
-try:
-    from .local_settings import *  # noqa
-except ImportError:
-    pass
+if DEPLOYMENT_ENVIRONMENT == "prod":
+    from .settings_prod import *  # noqa
+else:
+    DEBUG = True
+    ALLOWED_HOSTS += ["localhost", "backend"]
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
