@@ -31,6 +31,11 @@ jobs:
           echo "RDS_HOSTNAME=\"${{ secrets.RDS_HOSTNAME }}\"" >> .env
           echo "RDS_PORT=\"${{ secrets.RDS_PORT }}\"" >> .env
           echo "DEPLOYMENT_ENVIRONMENT=\"prod\"" >> .env
+          echo "EMAIL_HOST=\"${{ secrets.EMAIL_HOST }}\"" >> .env
+          echo "EMAIL_PORT=\"${{ secrets.EMAIL_PORT }}\"" >> .env
+          echo "EMAIL_HOST_USER=\"${{ secrets.EMAIL_HOST_USER }}\"" >> .env
+          echo "EMAIL_HOST_PASSWORD=\"${{ secrets.EMAIL_HOST_PASSWORD }}\"" >> .env
+          echo "DEFAULT_FROM_EMAIL=\"${{ secrets.EMAIL_HOST_USER }}\"" >> .env
 
           cd ec2/
           sudo cp ./docker-compose.service /etc/systemd/system/docker-compose.service
