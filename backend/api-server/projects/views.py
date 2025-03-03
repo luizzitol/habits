@@ -2,12 +2,10 @@ from django.shortcuts import render
 from .models import Project, ProjectUser, Invitation
 from ninja import Router, Schema
 from typing import List
-from ninja.security import django_auth
 import uuid
 
-from allauth.headless.contrib.ninja.security import x_session_token_auth
 
-project_router = Router(tags=["Projects"], auth=[django_auth, x_session_token_auth])
+project_router = Router(tags=["Projects"])
 
 class ProjectIn(Schema):
     name: str
