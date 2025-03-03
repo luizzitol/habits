@@ -7,7 +7,7 @@ import uuid
 
 from allauth.headless.contrib.ninja.security import x_session_token_auth
 
-project_router = Router(tags=["Projects"], auth=[x_session_token_auth])
+project_router = Router(tags=["Projects"], auth=[django_auth, x_session_token_auth])
 
 class ProjectIn(Schema):
     name: str
