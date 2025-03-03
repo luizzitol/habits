@@ -17,7 +17,25 @@
                     "localRoot": "${workspaceFolder}/backend",
                     "remoteRoot": "/code"
                 }
-            ]
-        }
+            ],
+            "justMyCode": false
+        },
+        {
+            "name": "api-server",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend/api-server/manage.py",
+            "args": [
+                "runserver",
+                "8000"
+            ],
+            "env": {
+                "DEPLOYMENT_ENVIRONMENT": "dev",
+                "DJANGO_SETTINGS_MODULE": "core.settings"
+            },
+            "console": "integratedTerminal",
+            "django": true,
+            "justMyCode": true
+        },
     ]
 }
