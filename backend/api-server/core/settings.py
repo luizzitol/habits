@@ -158,3 +158,5 @@ else:
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+    #crfs trusted origins
+    CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", "http://localhost:10000"]
