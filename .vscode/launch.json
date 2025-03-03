@@ -14,8 +14,8 @@
             },
             "pathMappings": [
                 {
-                    "localRoot": "${workspaceFolder}/backend",
-                    "remoteRoot": "/code"
+                    "localRoot": "${workspaceFolder}/backend/api-server",
+                    "remoteRoot": "/code/"
                 }
             ],
             "justMyCode": false
